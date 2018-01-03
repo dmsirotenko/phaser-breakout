@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Brick from '../prefabs/Brick'
+import Paddle from '../prefabs/Paddle'
 
 export default class extends Phaser.State {
   init () {}
@@ -8,6 +9,7 @@ export default class extends Phaser.State {
   create () {
     this.setUpText()
     this.setUpBricks()
+    this.setUpPaddle()
   }
 
   setUpText () {
@@ -59,6 +61,16 @@ export default class extends Phaser.State {
       this.game.world.centerX - bricksGroupWidth / 2,
       100
     )
+  }
+
+  setUpPaddle () {
+    this.paddle = new Paddle(
+      this.game,
+      this.game.world.centerX,
+      this.game.world.height - 150
+    )
+
+    this.game.add.existing(this.paddle)
   }
 
   render () {
