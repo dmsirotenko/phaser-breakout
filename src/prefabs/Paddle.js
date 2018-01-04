@@ -10,7 +10,15 @@ class Paddle extends Phaser.Sprite {
   }
 
   update () {
+    this.x = this.game.input.x
 
+    let pedalCenter = this.width / 2
+
+    if (this.x < pedalCenter) {
+      this.x = pedalCenter
+    } else if (this.x > this.game.width - pedalCenter) {
+      this.x = this.game.width - pedalCenter
+    }
   }
 }
 

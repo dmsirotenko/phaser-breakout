@@ -25,7 +25,7 @@ export default class extends Phaser.State {
       text, 
       {
         font: '18px Arial',
-        fill: '#000',
+        fill: '#fff',
         boundsAlignH: align
       }
     ).setTextBounds(0, 0, this.game.world.width, 0)

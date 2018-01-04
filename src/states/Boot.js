@@ -5,7 +5,7 @@ import { clone } from 'lodash'
 
 export default class extends Phaser.State {
   init () {
-    this.stage.backgroundColor = '#fff'
+    this.stage.backgroundColor = '#475b8d'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
   }
