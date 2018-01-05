@@ -23,9 +23,9 @@ export default class extends Phaser.State {
   }
 
   setUpText () {
-    this.createText(20, 20, 'left', `Score: ${this.game.global.score}`)
-    this.createText(0, 20, 'center', `Level: ${this.game.global.level}`)
-    this.createText(-20, 20, 'right', `Lives: ${this.game.global.lives}`)
+    this.scoreText = this.createText(20, 20, 'left', `Score: ${this.game.global.score}`)
+    this.levelText = this.createText(0, 20, 'center', `Level: ${this.game.global.level}`)
+    this.livesText = this.createText(-20, 20, 'right', `Lives: ${this.game.global.lives}`)
   }
 
   createText (xOffset, yOffset, align, text) {
@@ -153,6 +153,9 @@ export default class extends Phaser.State {
 
   ballHitBrick (ball, brick) {
     brick.kill()
+
+    this.game.global.score += 10
+    this.scoreText.text = `Score: ${this.game.global.score}`
   }
 
   render () {
