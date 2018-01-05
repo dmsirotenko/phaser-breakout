@@ -20,6 +20,8 @@ export default class extends Phaser.State {
     this.setUpBall()
 
     this.game.input.onDown.add(this.releaseBall, this)
+
+    this.game.physics.arcade.checkCollision.down = false
   }
 
   setUpText () {
@@ -47,8 +49,10 @@ export default class extends Phaser.State {
   }
 
   generateBricks (bricksGroup) {
-    let rows = 7
-    let columns = 15
+    // let rows = 7
+    // let columns = 15
+    let rows = 2
+    let columns = 3
     let xOffset = 53
     let yOffset = 26
     let brick
@@ -85,8 +89,19 @@ export default class extends Phaser.State {
 
   setUpBall () {
     this.ball = new Ball(this.game)
-
     this.game.add.existing(this.ball)
+
+    this.ball.events.onOutOfBounds.add(
+      this.ballLost,
+      this
+    )
+
+    this.putBallOnPaddle()
+  }
+
+  ballLost () {
+    this.game.global.lives--
+    this.livesText.text = `Lives: ${this.game.global.lives}`
 
     this.putBallOnPaddle()
   }
@@ -156,6 +171,16 @@ export default class extends Phaser.State {
 
     this.game.global.score += 10
     this.scoreText.text = `Score: ${this.game.global.score}`
+
+    if (this.bricks.countLiving() > 0) {
+      return
+    }
+
+    this.game.global.level++
+    this.levelText.text = `Level: ${this.game.global.level}`
+
+    this.putBallOnPaddle()
+    this.generateBricks(this.bricks)
   }
 
   render () {
