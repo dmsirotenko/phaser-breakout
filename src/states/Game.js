@@ -115,6 +115,44 @@ export default class extends Phaser.State {
     if (this.ballOnPaddle) {
       this.ball.body.x = this.paddle.x - this.ball.width / 2
     }
+
+    this.game.physics.arcade.collide(
+      this.ball,
+      this.paddle,
+      this.ballHitPaddle,
+      null,
+      this
+    )
+
+    this.game.physics.arcade.collide(
+      this.ball,
+      this.bricks,
+      this.ballHitBrick,
+      null,
+      this
+    )
+  }
+
+  ballHitPaddle (ball, paddle) {
+    let diff = 0
+
+    if (ball.x < paddle.x) {
+      diff = paddle.x - ball.x
+      ball.body.velocity.x = -10 * diff
+
+      return
+    }
+
+    if (ball.x > paddle.x) {
+      diff = ball.x - paddle.x
+      ball.body.velocity.x = 10 * diff
+
+      return
+    }
+  }
+
+  ballHitBrick (ball, brick) {
+    brick.kill()
   }
 
   render () {
