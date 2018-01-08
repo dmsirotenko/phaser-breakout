@@ -49,10 +49,8 @@ export default class extends Phaser.State {
   }
 
   generateBricks (bricksGroup) {
-    // let rows = 7
-    // let columns = 15
-    let rows = 2
-    let columns = 3
+    let rows = 7
+    let columns = 15
     let xOffset = 53
     let yOffset = 26
     let brick
